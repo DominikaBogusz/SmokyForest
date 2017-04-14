@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
     {
         if ((grounded || !doubleJump) && Input.GetKeyDown(KeyCode.Space))
         {
-            animator.SetBool("Ground", false);
+            animator.SetBool("grounded", false);
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
             //GetComponent<AudioSource>().Play();
 
