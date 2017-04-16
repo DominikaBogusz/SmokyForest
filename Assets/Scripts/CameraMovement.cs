@@ -6,19 +6,9 @@ public class CameraMovement : MonoBehaviour {
     private Vector3 cameraPosition;
     public static float cameraSpeed;
 
-    IEnumerator WaitAtStart()
-    {
-        yield return new WaitForSeconds(15f);
-        while (true)
-        {
-            yield return new WaitForSeconds(15f);
-        }
-    }
-
     void Start()
     {
-        WaitAtStart();
-        cameraSpeed = 5f;
+        cameraSpeed = 2f;
     }
 
     void Update()

@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour {
         if (grounded)
         {
             doubleJump = false;
+            GetComponent<BoxCollider2D>().enabled = true;
+        }
+        else
+        {
+            GetComponent<BoxCollider2D>().enabled = false;
         }
 
         //animator.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
@@ -85,9 +90,9 @@ public class PlayerController : MonoBehaviour {
         //}
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.tag == "Fire")
+        if (other.tag == "Fire")
         {
             Die();
         }
@@ -112,5 +117,7 @@ public class PlayerController : MonoBehaviour {
         //PlayerPrefs.SetInt("score", m_GameController.getScore());
 
         //Application.LoadLevel("Menu");
+
+        Debug.Log("Bam");
     }
 }
