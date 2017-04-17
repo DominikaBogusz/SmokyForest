@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour {
 
     void Start()
     {
-        cameraSpeed = 2f;
+        cameraSpeed = 5f;
     }
 
     void Update()
