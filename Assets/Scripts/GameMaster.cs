@@ -45,8 +45,6 @@ public class GameMaster : MonoBehaviour {
     {
         SaveScore();
         ShowGameOverScreen();
-
-        //Application.LoadLevel("Menu");
     }
 
     private void SaveScore()
