@@ -54,6 +54,7 @@ public class PlatformsGenerator : MonoBehaviour {
     {
         if (other.tag == "Fire")
         {
+            GameMaster.Instance.Score += 10;
             Destroy(currentPlatform);
             transform.Translate(new Vector3(transform.position.x, 50f));
             Arrange();

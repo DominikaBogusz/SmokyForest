@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class Player : MonoBehaviour {
 
     public float maxSpeed = 10f;
 
@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour {
     float groundRadius = 0.2f;
     public LayerMask whatIsGround;
     public float jumpForce = 300;
-    //GameObject[] planks;
 
     bool doubleJump = false;
 
@@ -38,8 +37,6 @@ public class PlayerController : MonoBehaviour {
         {
             GetComponent<BoxCollider2D>().enabled = false;
         }
-
-        //animator.SetFloat("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
 
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("speed", Mathf.Abs(move));
@@ -68,33 +65,13 @@ public class PlayerController : MonoBehaviour {
                 doubleJump = true;
             }
         }
-
-        if (GetComponent<Rigidbody2D>().velocity.y > 0)
-        {
-            gameObject.layer = 13;
-        }
-        else
-        {
-            gameObject.layer = 9;
-        }
-
-        //planks = GameObject.FindGameObjectsWithTag("Wall") as GameObject[];
-        //foreach (GameObject plank in planks)
-        //{
-        //    if (plank.transform.position.y <= gameObject.transform.position.y)
-        //    {
-        //        plank.GetComponent<Collider2D>().enabled = true;
-        //        gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-        //        Debug.Log("Bam");
-        //    }
-        //}
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Fire")
         {
-            Die();
+            GameMaster.Instance.EndGame();
         }
     }
 
@@ -104,20 +81,5 @@ public class PlayerController : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
-    }
-
-    void Die()
-    {
-        //// Save the Highscore to PlayerPrefs if higher than existing.
-        //if (PlayerPrefs.GetInt("highscore") < m_GameController.getScore())
-        //{
-        //    PlayerPrefs.SetInt("highscore", m_GameController.getScore());
-        //}
-        //PlayerPrefs.Save();
-        //PlayerPrefs.SetInt("score", m_GameController.getScore());
-
-        //Application.LoadLevel("Menu");
-
-        Debug.Log("Bam");
     }
 }

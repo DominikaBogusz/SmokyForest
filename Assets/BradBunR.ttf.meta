@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 21ae7f596eec7a84da8ff1d4629b63e2
+timeCreated: 1492482471
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Brady Bunch Remastered
+  fontNames:
+  - Brady Bunch Remastered
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
