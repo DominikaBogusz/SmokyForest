@@ -26,6 +26,10 @@ public class GameMaster : MonoBehaviour {
         {
             score = value;
             scoreText.text = "SCORE: " + score;
+            if(score % 100 == 0)
+            {
+                CameraMovement.IncreaseCameraSpeed();
+            }
         }
     }
     public int HighScore { get; set; }

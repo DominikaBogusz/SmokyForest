@@ -1,22 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
-    public float maxSpeed = 10f;
+    [SerializeField]
+    private float maxSpeed = 10f;
 
-    bool facingRight = true;
+    private bool facingRight = true;
 
-    bool grounded = false;
-    public Transform groundCheck;
-    float groundRadius = 0.2f;
-    public LayerMask whatIsGround;
-    public float jumpForce = 300;
+    private bool grounded = false;
+    [SerializeField]
+    private Transform groundCheck;
+    private float groundRadius = 0.2f;
+    [SerializeField]
+    private LayerMask whatIsGround;
+    [SerializeField]
+    private float jumpForce = 300;
+    
 
-    bool doubleJump = false;
+    private bool doubleJump = false;
 
-    Animator animator;
+    private Animator animator;
+
+    [SerializeField]
+    private Button moveLeft;
+    [SerializeField]
+    private Button moveRight;
 
     void Start()
     {
@@ -38,7 +49,20 @@ public class Player : MonoBehaviour {
             GetComponent<BoxCollider2D>().enabled = false;
         }
 
-        float move = Input.GetAxis("Horizontal");
+        //float move = Input.GetAxis("Horizontal");
+        float move;
+        if (moveLeft.GetComponent<CanvasRenderer>().GetColor() == moveLeft.GetComponent<Button>().colors.pressedColor * moveLeft.GetComponent<Button>().colors.colorMultiplier)
+        {
+            move = -1;
+        }
+        else if(moveRight.GetComponent<CanvasRenderer>().GetColor() == moveRight.GetComponent<Button>().colors.pressedColor * moveRight.GetComponent<Button>().colors.colorMultiplier)
+        {
+            move = 1;
+        }
+        else
+        {
+            move = 0;
+        }
         animator.SetFloat("speed", Mathf.Abs(move));
         GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
@@ -52,20 +76,20 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void Update()
-    {
-        if ((grounded || !doubleJump) && Input.GetKeyDown(KeyCode.Space))
-        {
-            animator.SetBool("grounded", false);
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
-            //GetComponent<AudioSource>().Play();
+    //void Update()
+    //{
+    //    if ((grounded || !doubleJump) && Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        animator.SetBool("grounded", false);
+    //        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
+    //        //GetComponent<AudioSource>().Play();
 
-            if (!doubleJump && !grounded)
-            {
-                doubleJump = true;
-            }
-        }
-    }
+    //        if (!doubleJump && !grounded)
+    //        {
+    //            doubleJump = true;
+    //        }
+    //    }
+    //}
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -81,5 +105,20 @@ public class Player : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    public void Jump()
+    {
+        if ((grounded || !doubleJump))
+        {
+            animator.SetBool("grounded", false);
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
+            //GetComponent<AudioSource>().Play();
+
+            if (!doubleJump && !grounded)
+            {
+                doubleJump = true;
+            }
+        }
     }
 }

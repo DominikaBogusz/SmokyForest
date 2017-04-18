@@ -34,6 +34,9 @@ public class Borders : MonoBehaviour {
     void OnBecameInvisible()
     {
         transform.Translate(transform.position.x, height * 3, transform.position.z);
-        SetPosition();
+        if (Camera.main)
+        {
+            SetPosition();
+        }
     }
 }
