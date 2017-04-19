@@ -12,36 +12,20 @@ public class PlatformsGenerator : MonoBehaviour {
 
     private GameObject currentPlatform;
 
-    private static int previousNone = 0;
-
-    void Start()
+    public void Arrange(int random)
     {
-        Arrange();
-    }
-
-    private void Arrange()
-    {
-        int randomPlatformLength = Random.Range(previousNone, 5);
-
-        switch (randomPlatformLength)
+        switch (random)
         {
-            case 0:
-                previousNone = 1;
-                break;
             case 1:
-                previousNone = 0;
                 currentPlatform = Instantiate(platform1, points1[Random.Range(0, points1.Length)]);
                 break;
             case 2:
-                previousNone = 0;
                 currentPlatform = Instantiate(platform2, points2[Random.Range(0, points2.Length)]);
                 break;
             case 3:
-                previousNone = 0;
                 currentPlatform = Instantiate(platform3, points3[Random.Range(0, points3.Length)]);
                 break;
             case 4:
-                previousNone = 0;
                 currentPlatform = Instantiate(platform4, points4[Random.Range(0, points4.Length)]);
                 break;
             default:
@@ -57,7 +41,7 @@ public class PlatformsGenerator : MonoBehaviour {
             GameMaster.Instance.Score += 10;
             Destroy(currentPlatform);
             transform.Translate(new Vector3(transform.position.x, 50f));
-            Arrange();
+            GetComponentInParent<PlatformAreas>().PickPlatform(gameObject.transform);
         }
     }
 }
