@@ -49,20 +49,28 @@ public class Player : MonoBehaviour {
             GetComponent<BoxCollider2D>().enabled = false;
         }
 
-        //float move = Input.GetAxis("Horizontal");
         float move;
-        if (moveLeft.GetComponent<CanvasRenderer>().GetColor() == moveLeft.GetComponent<Button>().colors.pressedColor * moveLeft.GetComponent<Button>().colors.colorMultiplier)
+
+        if (Application.platform == RuntimePlatform.Android)
         {
-            move = -1;
-        }
-        else if(moveRight.GetComponent<CanvasRenderer>().GetColor() == moveRight.GetComponent<Button>().colors.pressedColor * moveRight.GetComponent<Button>().colors.colorMultiplier)
-        {
-            move = 1;
+            if (moveLeft.GetComponent<CanvasRenderer>().GetColor() == moveLeft.GetComponent<Button>().colors.pressedColor * moveLeft.GetComponent<Button>().colors.colorMultiplier)
+            {
+                move = -1;
+            }
+            else if (moveRight.GetComponent<CanvasRenderer>().GetColor() == moveRight.GetComponent<Button>().colors.pressedColor * moveRight.GetComponent<Button>().colors.colorMultiplier)
+            {
+                move = 1;
+            }
+            else
+            {
+                move = 0;
+            }
         }
         else
         {
-            move = 0;
+            move = Input.GetAxis("Horizontal");
         }
+
         animator.SetFloat("speed", Mathf.Abs(move));
         GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
@@ -76,20 +84,13 @@ public class Player : MonoBehaviour {
         }
     }
 
-    //void Update()
-    //{
-    //    if ((grounded || !doubleJump) && Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        animator.SetBool("grounded", false);
-    //        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
-    //        //GetComponent<AudioSource>().Play();
-
-    //        if (!doubleJump && !grounded)
-    //        {
-    //            doubleJump = true;
-    //        }
-    //    }
-    //}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

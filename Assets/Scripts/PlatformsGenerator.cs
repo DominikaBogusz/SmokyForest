@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformsGenerator : MonoBehaviour {
 
     [SerializeField]
-    private GameObject platform1, platform2, platform3, platform4;
+    private GameObject platform0, platform1, platform2, platform3, platform4;
 
     [SerializeField]
     private Transform[] points1, points2, points3, points4;
@@ -16,6 +16,9 @@ public class PlatformsGenerator : MonoBehaviour {
     {
         switch (random)
         {
+            case 0:
+                currentPlatform = Instantiate(platform0, transform);
+                break;
             case 1:
                 currentPlatform = Instantiate(platform1, points1[Random.Range(0, points1.Length)]);
                 break;

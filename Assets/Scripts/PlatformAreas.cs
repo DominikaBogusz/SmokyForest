@@ -17,14 +17,7 @@ public class PlatformAreas : MonoBehaviour {
     public void PickPlatform(Transform platformArea)
     {
         int randomPlatformLength = Random.Range(previousNone, 5);
-        if (randomPlatformLength > 0)
-        {
-            platformArea.GetComponent<PlatformsGenerator>().Arrange(randomPlatformLength);
-            previousNone = 0;
-        }
-        else
-        {
-            previousNone = 1;
-        }
+        platformArea.GetComponent<PlatformsGenerator>().Arrange(randomPlatformLength);
+        previousNone = randomPlatformLength > 0 ? 0 : 1;
     }
 }
